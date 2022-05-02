@@ -2,7 +2,7 @@
 
 A CLI quadratic equation solver built with Rust
 
-[Quadratic equations on WikiPedia](https://en.wikipedia.org/wiki/Quadratic_equation)
+[Quadratic equations on Wikipedia](https://en.wikipedia.org/wiki/Quadratic_equation)
 
 ## Usage
 
