@@ -19,8 +19,10 @@ fn main() {
     println!("a = {}", a);
     println!("b = {}", b);
     println!("c = {}", c);
-    println!("\nSolving {}x^2 {:+}x {:+} = 0", a, b, c);
+
     let solving_caption: String = format!("\nSolving {}x^2 {:+}x {:+} = 0", a, b, c);
+
+    println!("{solving_caption}");
 
     let discriminant: f64 = calculate_discriminant(a, b, c).into();
     println!("\nDiscriminant = {}\n", discriminant);
@@ -142,24 +144,27 @@ fn plot_this(
     let plot_from = x_1.min(x_2) - (x_1.max(x_2) - vertex_x_and_y.0);
     let plot_to = x_1.max(x_2) + (x_1.max(x_2) - vertex_x_and_y.0);
 
-    println!("from {}", plot_from);
-    println!("to {}", plot_to);
+    let parabola_style = ShapeStyle {
+        color: BLUE.mix(0.6),
+        filled: false,
+        stroke_width: 2,
+    };
 
     chart.draw_series(LineSeries::new(
         ((plot_from * 10.1) as i32..=((plot_to) * 10.1) as i32)
             .map(|x| x as f64 / 10.0)
             .map(|x| (x, a * x * x + b * x + c)),
-        ShapeStyle::from(&RED).stroke_width(2),
+        parabola_style,
     ))?;
 
     // Create three points with different colors
     let point1 = Circle::new(
         (vertex_x_and_y.0, vertex_x_and_y.1),
         4,
-        ShapeStyle::from(&BLUE).filled(),
+        ShapeStyle::from(&RED).filled(),
     );
-    let point2 = Circle::new((x_1, 0.0), 4, ShapeStyle::from(&BLUE).filled());
-    let point3 = Circle::new((x_2, 0.0), 4, ShapeStyle::from(&BLUE).filled());
+    let point2 = Circle::new((x_1, 0.0), 4, ShapeStyle::from(&RED).filled());
+    let point3 = Circle::new((x_2, 0.0), 4, ShapeStyle::from(&RED).filled());
 
     // Draw the points on the chart
     chart.draw_series(std::iter::once(point1))?;
