@@ -33,8 +33,13 @@ fn main() {
 
     println!("\nVertex ({}, {})", vertex_x_and_y.0, vertex_x_and_y.1);
 
-    plot_this(x_1, x_2, vertex_x_and_y, a, b, c, solving_caption)
-        .expect("This fixes the error for now");
+    match plot_this(x_1, x_2, vertex_x_and_y, a, b, c, solving_caption) {
+        Ok(value) => value,
+        Err(error) => {
+            println!("Error: {}", error);
+            return;
+        }
+    };
 }
 
 fn calculate_discriminant(a: f64, b: f64, c: f64) -> f64 {
